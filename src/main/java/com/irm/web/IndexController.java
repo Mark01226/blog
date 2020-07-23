@@ -18,4 +18,10 @@ public class IndexController {
         System.out.println("------index---------");
         return "index";
     }
+
+    @GetMapping("/blog")
+    public String blog(){
+        return "blog";
+    }
+
 }
