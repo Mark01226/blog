@@ -1,7 +1,7 @@
-package com.irm.web.admin;
+package com.lrm.web.admin;
 
-import com.irm.po.User;
-import com.irm.service.UserService;
+import com.lrm.po.User;
+import com.lrm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

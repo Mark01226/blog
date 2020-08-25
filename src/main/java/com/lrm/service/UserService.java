@@ -1,6 +1,6 @@
-package com.irm.service;
+package com.lrm.service;
 
-import com.irm.po.User;
+import com.lrm.po.User;
 
 public interface UserService {
     User checkUser(String username, String password);

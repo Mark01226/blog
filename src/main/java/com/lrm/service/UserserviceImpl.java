@@ -1,7 +1,8 @@
-package com.irm.service;
+package com.lrm.service;
 
-import com.irm.dao.UserRepository;
-import com.irm.po.User;
+import com.lrm.dao.UserRepository;
+import com.lrm.po.User;
+import com.lrm.util.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +13,8 @@ public class UserserviceImpl implements UserService {
 
     @Override
     public User checkUser(String username, String password) {
-
-        User user = userRepository.findByUsernameAndPassword(username, password);
+//        MD5加密：避免使用明码的方式在网络上传播
+        User user = userRepository.findByUsernameAndPassword(username, MD5Utils.code(password));
         return user;
     }
 }

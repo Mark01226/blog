@@ -1,4 +1,4 @@
-package com.irm.po;
+package com.lrm.po;
 
 
 import javax.persistence.*;
