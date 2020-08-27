@@ -11,4 +11,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @createTime 2020年08月25日 15:26:00
  */
 public interface TypeRepository extends JpaRepository<Type, Long> {
+
+    Type findByName(String name);
+
 }
