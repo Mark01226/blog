@@ -1,11 +1,13 @@
 package com.lrm.po;
 
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Created by limi on 2017/10/14.
+ */
 @Entity
 @Table(name = "t_comment")
 public class Comment {
@@ -13,7 +15,6 @@ public class Comment {
     @Id
     @GeneratedValue
     private Long id;
-
     private String nickname;
     private String email;
     private String content;
@@ -24,11 +25,13 @@ public class Comment {
     @ManyToOne
     private Blog blog;
 
-    @OneToMany(mappedBy = "parentCommend")
-    private List<Comment> replyCommends = new ArrayList<>();
+    @OneToMany(mappedBy = "parentComment")
+    private List<Comment> replyComments = new ArrayList<>();
 
     @ManyToOne
-    private Comment parentCommend;
+    private Comment parentComment;
+
+    private boolean adminComment;
 
     public Comment() {
     }
@@ -89,20 +92,28 @@ public class Comment {
         this.blog = blog;
     }
 
-    public List<Comment> getReplyCommends() {
-        return replyCommends;
+    public List<Comment> getReplyComments() {
+        return replyComments;
     }
 
-    public void setReplyCommends(List<Comment> replyCommends) {
-        this.replyCommends = replyCommends;
+    public void setReplyComments(List<Comment> replyComments) {
+        this.replyComments = replyComments;
     }
 
-    public Comment getParentCommend() {
-        return parentCommend;
+    public Comment getParentComment() {
+        return parentComment;
     }
 
-    public void setParentCommend(Comment parentCommend) {
-        this.parentCommend = parentCommend;
+    public void setParentComment(Comment parentComment) {
+        this.parentComment = parentComment;
+    }
+
+    public boolean isAdminComment() {
+        return adminComment;
+    }
+
+    public void setAdminComment(boolean adminComment) {
+        this.adminComment = adminComment;
     }
 
     @Override
@@ -114,6 +125,10 @@ public class Comment {
                 ", content='" + content + '\'' +
                 ", avatar='" + avatar + '\'' +
                 ", createTime=" + createTime +
+                ", blog=" + blog +
+                ", replyComments=" + replyComments +
+                ", parentComment=" + parentComment +
+                ", adminComment=" + adminComment +
                 '}';
     }
 }

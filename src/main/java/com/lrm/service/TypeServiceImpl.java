@@ -6,16 +6,16 @@ import com.lrm.po.Type;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
- * @author admin
- * @version 1.0.0
- * @ClassName TypeServiceImpl.java
- * @Description TODO
- * @createTime 2020年08月25日 15:25:00
+ * Created by limi on 2017/10/16.
  */
 @Service
 public class TypeServiceImpl implements TypeService {
@@ -29,11 +29,10 @@ public class TypeServiceImpl implements TypeService {
         return typeRepository.save(type);
     }
 
-
     @Transactional
     @Override
     public Type getType(Long id) {
-        return typeRepository.findById(id).get();
+        return typeRepository.findOne(id);
     }
 
     @Override
@@ -47,20 +46,36 @@ public class TypeServiceImpl implements TypeService {
         return typeRepository.findAll(pageable);
     }
 
+    @Override
+    public List<Type> listType() {
+        return typeRepository.findAll();
+    }
+
+
+    @Override
+    public List<Type> listTypeTop(Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC,"blogs.size");
+        Pageable pageable = new PageRequest(0,size,sort);
+        return typeRepository.findTop(pageable);
+    }
+
+
     @Transactional
     @Override
     public Type updateType(Long id, Type type) {
-        Type t = typeRepository.findById(id).get();
-        if (t == null){
+        Type t = typeRepository.findOne(id);
+        if (t == null) {
             throw new NotFoundException("不存在该类型");
         }
-        BeanUtils.copyProperties(type, t);
+        BeanUtils.copyProperties(type,t);
         return typeRepository.save(t);
     }
+
+
 
     @Transactional
     @Override
     public void deleteType(Long id) {
-        typeRepository.deleteById(id);
+        typeRepository.delete(id);
     }
 }

@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Created by limi on 2017/10/14.
+ */
 @Entity
 @Table(name = "t_user")
 public class User {
@@ -12,7 +15,6 @@ public class User {
     @Id
     @GeneratedValue
     private Long id;
-
     private String nickname;
     private String username;
     private String password;
@@ -101,6 +103,7 @@ public class User {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
 
     public List<Blog> getBlogs() {
         return blogs;

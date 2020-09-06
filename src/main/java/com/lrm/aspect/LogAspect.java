@@ -1,6 +1,5 @@
 package com.lrm.aspect;
 
-
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
@@ -12,17 +11,21 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
+/**
+ * Created by limi on 2017/10/13.
+ */
 @Aspect
 @Component
 public class LogAspect {
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-
     @Pointcut("execution(* com.lrm.web.*.*(..))")
-    public void log(){}
+    public void log() {}
+
 
     @Before("log()")
-    public void doBefore(JoinPoint joinPoint){
+    public void doBefore(JoinPoint joinPoint) {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         String url = request.getRequestURL().toString();
@@ -35,15 +38,15 @@ public class LogAspect {
 
     @After("log()")
     public void doAfter() {
-//        logger.info("---------deAfter------------");
+//        logger.info("--------doAfter--------");
     }
 
-    @AfterReturning(returning = "result", pointcut = "log()")
-    public void doAfterReturn(Object result){
-        logger.info("Result:{}", result);
+    @AfterReturning(returning = "result",pointcut = "log()")
+    public void doAfterRuturn(Object result) {
+        logger.info("Result : {}", result);
     }
 
-    private class RequestLog{
+    private class RequestLog {
         private String url;
         private String ip;
         private String classMethod;
@@ -66,4 +69,5 @@ public class LogAspect {
                     '}';
         }
     }
+
 }

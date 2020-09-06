@@ -4,12 +4,10 @@ import com.lrm.po.Type;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
- * @author admin
- * @version 1.0.0
- * @ClassName TypeService.java
- * @Description TODO
- * @createTime 2020年08月25日 15:22:00
+ * Created by limi on 2017/10/16.
  */
 public interface TypeService {
 
@@ -20,6 +18,10 @@ public interface TypeService {
     Type getTypeByName(String name);
 
     Page<Type> listType(Pageable pageable);
+
+    List<Type> listType();
+
+    List<Type> listTypeTop(Integer size);
 
     Type updateType(Long id, Type type);
 
